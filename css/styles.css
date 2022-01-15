@@ -1,2 +1,11 @@
+#bookGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+}
+
+#btn:hover {
+    opacity: 50%;
+}
 
 
