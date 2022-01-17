@@ -18,10 +18,19 @@ pg2.onclick = changePage2;
 
 var pageNum = 0;
 
+var Se = 0;
+
 button.addEventListener("click", render);
 
+// button.addEventListener("mouseover", search)
 
-button.addEventListener("click", backgroundIMG);
+pg0.addEventListener("click", pageHide);
+
+pg1.addEventListener("click", pageHide);
+
+pg2.addEventListener("click", pageHide);
+
+pg2.addEventListener("click", render);
 
 //Garbage code, should be changed later
 
@@ -32,6 +41,7 @@ button.addEventListener("click", backgroundIMG);
 //};
 
 async function fetchText() {
+    if(pageNum === 0){
         try{
             let response = await fetch(`https://api.adviceslip.com/advice/search/${document.getElementById('box').value}`);
             let data = await response.json();
@@ -39,26 +49,70 @@ async function fetchText() {
         } catch (error) {
             return console.log(error);
         }
+    }else if (pageNum === 1){
+        try{
+            let response = await fetch(`https://api.adviceslip.com/advice/${document.getElementById('box').value}`);
+            let data = await response.json();
+            return data;
+        } catch (error) {
+            return console.log(error);
+        }
+    }else{
+        try{
+            let response = await fetch(`https://api.adviceslip.com/advice`);
+            let data = await response.json();
+            return data;
+        } catch (error) {
+            return console.log(error);
+        }
+    }
 }
 
 function getHTML(advice){
-    return`
-    <div class="card" style="width: 18rem;" style="margin-bottom: 50px">
-    <div class="card-body">
-    <h5 class="card-title">${advice.date}</h5>
-    <p class="card-text">${advice.advice}</p>
-    </div>
-    </div>`}
+    if(pageNum === 0){
+        return`
+        <div class="card" style="margin-bottom: 50px">
+        <div class="card-body">
+        <h5 class="card-title">${advice.date}</h5>
+        <p class="card-text">${advice.advice}</p>
+        </div>
+        </div>`}else if(pageNum === 1){
+            return `<div class="card" style="margin-bottom: 50px">
+            <div class="card-body">
+            <p class="card-text">${advice.advice}</p>
+            </div>
+            </div>`
+        }
+        else if(pageNum === 2){
+            return `<div class="card" style="margin-bottom: 50px">
+            <div class="card-body">
+            <p class="card-text">${advice.advice}</p>
+            </div>
+            </div>`
+        }
+    }
 
 
 
 
 
 async function render(){
-    const List = await fetchText(); 
-    let html = List.slips.map(x=> getHTML(x)).join('');
-    let el = document.getElementById('Grid');
-    el.innerHTML = html;
+    if(pageNum === 0){
+        const List = await fetchText(); 
+        let html = List.slips.map(x=> getHTML(x)).join('');
+        let el = document.getElementById('Grid');
+        el.innerHTML = html;
+    }else if(pageNum === 1){
+        const List = await fetchText(); 
+        let html = getHTML(List.slip);
+        let el = document.getElementById('Grid');
+        el.innerHTML = html;
+    }else if(pageNum === 2){
+        const List = await fetchText(); 
+        let html = getHTML(List.slip);
+        let el = document.getElementById('Grid');
+        el.innerHTML = html;
+    }
 }
 
 async function display(){
@@ -90,15 +144,30 @@ function changePage2(){
     return true;
 }
 
- function backgroundIMG(){
-     if(pageNum === 0){
-         topBar.style.backgroundImage = "url(https://static-cse.canva.com/blob/572026/removingbackgroundimages_Unsplash.jpeg)";     
-   }else if(pageNum === 1){
-       topBar.style.backgroundImage = "url(https://wallpapersmug.com/large/da140e/green-leaf-dense-big.jpg)";     
-
-    }else{
-        topBar.style.backgroundImage = "url(https://static-cse.canva.com/blob/572026/removingbackgroundimages_Unsplash.jpeg)";     
-
+function backgroundIMG() {
+    if(pageNum === 0){
+        topBar.style.backgroundImage = 'https://wallpapersmug.com/large/da140e/green-leaf-dense-big.jpg';
+    }
 }
+
+// function pageTest(){
+//     if(pageNum != 2){
+//         document.getElementById('inner').innerHTML = `<form id="frm1" action="#">
+//         Query: <input type="text" name="query" id="box"><br>
+//       </form>
+//       <button type="button" id="btn">Submit</button>`
+//     }
+//     if(pageNum === 2){
+//         document.getElementById('inner').innerHTML = `<button type="button" id="btn">Try your luck!</button>`
+//     }}
+
+function pageHide(){
+    document.getElementById("Grid").innerHTML = ``;
+    if(pageNum === 2){
+        document.getElementById("inner").style.display = "none"
+    }else{
+        document.getElementById("inner").style.display = "flex"
+    }
+    
 }
 
