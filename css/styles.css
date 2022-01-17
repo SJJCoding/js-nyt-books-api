@@ -1,6 +1,7 @@
 #bookGrid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(5, 1fr);
 
 }
 
@@ -8,4 +9,27 @@
     opacity: 50%;
 }
 
+.UL1 {
+    padding-top: 75px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    background-image: url(https://static-cse.canva.com/blob/572026/removingbackgroundimages_Unsplash.jpeg);
+    background-size: cover;
+    padding-bottom: 150px;
+}
+
+li {
+    text-decoration: none;
+    color: white;
+    list-style-type: none;
+}
+
+p {
+    font-size: 50px;
+    font-family: poppins;
+    text-decoration: none;
+    color: white;
+    list-style-type: none;
+}
 

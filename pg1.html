@@ -16,20 +16,12 @@
   <body>
     <main id="main">
       <ul class="UL1">
-        <li id="pg0"><p>Search for advice by name</p></li>
-        <li id="pg1"><p>Search for advice by ID</p></li>
-        <li id="pg2"><p>Try your luck!</p></li>
-        <!-- <form id="pg0" action="index.html">
-          <input type="submit" value="Page 1">
-        </form> -->
-        <!-- <form id="pg1" action="pg1.html">
+        <li><a href="index.html" id="pg0">Search for advice by name</a></li>
+        <form id="test" action="pg2.html">
           <input type="submit" value="Page 2">
         </form>
-        <form id="pg2" action="pg2.html">
-          <input type="submit" value="Page 3">
-        </form> -->
-        <!-- <li><a href="pg1.html" onclick="return changePage1()" id="pg1">Search for advice by ID</a></li>
-        <li><a href="pg2.html" id="pg2">Try your luck!</a></li> -->
+        <li><b><a href="pg1.html" id="pg1">Search for advice by ID</a></b></li>
+        <li><a href="pg2.html" id="pg2">Try your luck!</a></li>
       </ul>
       <form id="frm1" action="#">
         Query: <input type="text" name="query" id="box"><br>
@@ -39,5 +31,10 @@
     </main>
     <script src="data/books.js"></script>
     <script src="data/books.js"></script>
+    <style>
+      .UL1 {
+        background-image: url(https://wallpapersmug.com/large/da140e/green-leaf-dense-big.jpg);
+      }
+    </style>
   </body>
 </html>
