@@ -171,3 +171,9 @@ function pageHide(){
     
 }
 
+document.body.onkeyup = function(e){
+    if(e.keyCode == 32){
+        render();
+    }
+}
+
